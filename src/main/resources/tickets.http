@@ -1,0 +1,85 @@
+### Create User
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
+
+{
+  "username": "user",
+  "password": "password",
+  "email": "newuser@example.com"
+}
+
+###
+
+### Update User
+PUT http://localhost:8080/api/v1/users/1
+Content-Type: application/json
+
+{
+  "username": "updatedUser",
+  "email": "updateduser@example.com"
+}
+
+###
+
+### Get User by ID
+GET http://localhost:8080/api/v1/users/1
+Accept: application/json
+
+###
+
+### Get All Users
+GET http://localhost:8080/api/v1/users
+Accept: application/json
+
+###
+
+### Delete User
+DELETE http://localhost:8080/api/v1/users/1
+
+###
+
+### Create Ticket
+POST http://localhost:8080/api/v1/tickets
+Content-Type: application/json
+Authorization: Basic user password
+
+{
+  "subject": "New Issue in System",
+  "description": "Details about the issue..."
+}
+
+###
+
+### Get All Tickets
+GET http://localhost:8080/api/v1/tickets
+Accept: application/json
+
+###
+
+### Get Ticket by ID
+GET http://localhost:8080/api/v1/tickets/{ticketId}
+Accept: application/json
+
+###
+
+### Update Ticket
+PUT http://localhost:8080/api/v1/tickets/{ticketId}
+Content-Type: application/json
+
+{
+  "subject": "Updated Issue Title",
+  "description": "Updated details about the fix..."
+}
+
+###
+
+### Close Ticket
+PUT http://localhost:8080/api/v1/tickets/{ticketId}/close
+Content-Type: application/json
+
+{
+  "closingComment": "Fixed the issue"
+}
+
+###
