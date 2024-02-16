@@ -1,12 +1,55 @@
 ### Create User
 POST http://localhost:8080/api/v1/users
 Content-Type: application/json
-Authorization: Basic dXNlcjpwYXNzd29yZA==
+Authorization: Basic admin password
+
+
+  {
+    "username": "admin",
+    "password": "adminpassword",
+    "email": "admin@example.com",
+    "role": "ADMIN"
+  }
+
+###
+
+### Create User
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+Authorization: Basic user password
 
 {
   "username": "user",
-  "password": "password",
-  "email": "newuser@example.com"
+  "password": "adminpassword",
+  "email": "admin@example.com"
+}
+
+###
+
+POST http://localhost:8080/api/v1/tickets
+Content-Type: application/json
+Authorization: Basic admin password
+
+{
+  "subject": "Issue 1",
+  "description": "Details about Issue 1",
+  "user": {
+    "id": "1"
+  }
+}
+
+###
+
+POST http://localhost:8080/api/v1/tickets
+Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
+
+{
+  "subject": "Issue 2",
+  "description": "Details about Issue 2",
+  "user": {
+    "id": "2"
+  }
 }
 
 ###
@@ -14,10 +57,12 @@ Authorization: Basic dXNlcjpwYXNzd29yZA==
 ### Update User
 PUT http://localhost:8080/api/v1/users/1
 Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 {
   "username": "updatedUser",
-  "email": "updateduser@example.com"
+  "email": "updateduser@example.com",
+  "role": "ADMIN"
 }
 
 ###
@@ -25,12 +70,14 @@ Content-Type: application/json
 ### Get User by ID
 GET http://localhost:8080/api/v1/users/1
 Accept: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 ###
 
 ### Get All Users
 GET http://localhost:8080/api/v1/users
 Accept: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 ###
 
@@ -42,30 +89,28 @@ DELETE http://localhost:8080/api/v1/users/1
 ### Create Ticket
 POST http://localhost:8080/api/v1/tickets
 Content-Type: application/json
-Authorization: Basic user password
-
-{
-  "subject": "New Issue in System",
-  "description": "Details about the issue..."
-}
-
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 ###
+
 
 ### Get All Tickets
 GET http://localhost:8080/api/v1/tickets
 Accept: application/json
+Authorization: Basic user password
 
 ###
 
 ### Get Ticket by ID
 GET http://localhost:8080/api/v1/tickets/{ticketId}
 Accept: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 ###
 
 ### Update Ticket
 PUT http://localhost:8080/api/v1/tickets/{ticketId}
 Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 {
   "subject": "Updated Issue Title",
@@ -77,9 +122,20 @@ Content-Type: application/json
 ### Close Ticket
 PUT http://localhost:8080/api/v1/tickets/{ticketId}/close
 Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 {
   "closingComment": "Fixed the issue"
 }
 
 ###
+
+### post a new comment
+POST http://localhost:8080/api/v1/comments/1
+Content-Type: application/json
+Authorization: Basic user password
+
+{
+  "content": "Further information",
+  "user": "2"
+}

@@ -2,6 +2,7 @@ package edu.erezd.erezproject.service;
 
 import edu.erezd.erezproject.dto.UserCreateDTO;
 import edu.erezd.erezproject.dto.UserResponseDTO;
+import edu.erezd.erezproject.entity.User;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface UserService {
     List<UserResponseDTO> getAllUsers();
 
     UserResponseDTO deleteUserById(long id);
+
+    User getUserEntityOrThrow(long id);
 
 }

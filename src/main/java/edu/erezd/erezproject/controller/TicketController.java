@@ -7,8 +7,11 @@ import edu.erezd.erezproject.service.TicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/tickets")
@@ -43,6 +46,7 @@ public class TicketController {
     }
 
     @PutMapping("/{id}/close")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TicketResponseDTO> closeTicket(
             @PathVariable long id,
             @RequestBody @Valid TicketCloseDTO dto
@@ -53,7 +57,8 @@ public class TicketController {
     }
 
     @GetMapping
-    public ResponseEntity<TicketResponseDTO> getAllTickets() {
-        return ResponseEntity.ok(ticketService.getAllTickets());
+    public ResponseEntity<List<TicketResponseDTO>> getAllTickets() {
+        List<TicketResponseDTO> tickets = ticketService.getAllTickets();
+        return ResponseEntity.ok(tickets);
     }
 }

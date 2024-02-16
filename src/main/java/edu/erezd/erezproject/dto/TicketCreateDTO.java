@@ -1,7 +1,9 @@
 package edu.erezd.erezproject.dto;
 
+import edu.erezd.erezproject.entity.Comment;
 import edu.erezd.erezproject.entity.Role;
 import edu.erezd.erezproject.entity.Status;
+import edu.erezd.erezproject.entity.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -25,9 +27,16 @@ public class TicketCreateDTO {
     @Size(min = 2)
     private String description;
 
+    private Long userId;
+
+    private User user;
+
+    private Comment comment;
+
     private Status status;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
 }

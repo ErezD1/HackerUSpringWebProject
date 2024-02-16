@@ -5,8 +5,11 @@ import edu.erezd.erezproject.dto.TicketCreateDTO;
 import edu.erezd.erezproject.dto.TicketResponseDTO;
 import edu.erezd.erezproject.entity.Status;
 import edu.erezd.erezproject.entity.Ticket;
+import edu.erezd.erezproject.entity.User;
 import edu.erezd.erezproject.repository.TicketRepository;
+import edu.erezd.erezproject.repository.UserRepository;
 import edu.erezd.erezproject.service.TicketService;
+import edu.erezd.erezproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,16 +25,23 @@ public class TicketServiceImpl implements TicketService{
 
     private final TicketRepository ticketRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     @Override
     public TicketResponseDTO createTicket(TicketCreateDTO ticketDTO) {
         Ticket ticket = modelMapper.map(ticketDTO, Ticket.class);
         ticket.setStatus(Status.OPEN); // Set status on the entity
         ticket.setCreatedAt(LocalDateTime.now()); // Set createdAt on the entity
+
+        // Use userService to get the user entity
+        User user = userService.getUserEntityOrThrow(ticketDTO.getUser().getId());
+        ticket.setUser(user); // Set the user on the ticket
+
         Ticket saved = ticketRepository.save(ticket);
 
         return modelMapper.map(saved, TicketResponseDTO.class);
     }
+
 
 
     @Override
@@ -81,9 +91,9 @@ public class TicketServiceImpl implements TicketService{
 
 
     @Override
-    public TicketResponseDTO getAllTickets() {
+    public List<TicketResponseDTO> getAllTickets() {
         List<Ticket> tickets = ticketRepository.findAll();
-        return (TicketResponseDTO) tickets.stream()
+        return tickets.stream()
                 .map(ticket -> modelMapper.map(ticket, TicketResponseDTO.class))
                 .collect(Collectors.toList());
     }

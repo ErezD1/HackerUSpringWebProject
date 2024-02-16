@@ -1,6 +1,6 @@
 package edu.erezd.erezproject.dto;
 
-import edu.erezd.erezproject.entity.Role;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserResponseDTO {
+public class CommentUpdateDTO {
 
-    private long id;
-    private String username;
-    private String email;
-    private Role role;
+    @Size(min = 2)
+    private String content;
 
 }

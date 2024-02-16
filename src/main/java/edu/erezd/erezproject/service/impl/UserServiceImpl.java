@@ -2,6 +2,7 @@ package edu.erezd.erezproject.service.impl;
 
 import edu.erezd.erezproject.dto.UserCreateDTO;
 import edu.erezd.erezproject.dto.UserResponseDTO;
+import edu.erezd.erezproject.entity.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import edu.erezd.erezproject.entity.User;
 import edu.erezd.erezproject.exception.ResourceNotFoundException;
@@ -35,6 +36,13 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setEmail(dto.getEmail());
+        if (dto.getRole() != null){
+            user.setRoles("ROLE_ADMIN");
+        } else {
+            user.setRoles("ROLE_USER");
+
+        }
         User saved = userRepository.save(user);
         return modelMapper.map(saved, UserResponseDTO.class);
     }
@@ -51,6 +59,7 @@ public class UserServiceImpl implements UserService {
         User user = getUserEntityOrThrow(id); // Use the helper method to ensure the user exists
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
+        user.setRole(Role.valueOf(String.valueOf(dto.getRole())));
         // Consider adding more fields to update as necessary
         User saved = userRepository.save(user);
         return modelMapper.map(saved, UserResponseDTO.class);
@@ -71,10 +80,18 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
-    private User getUserEntityOrThrow(long id) {
+    public User getUserEntityOrThrow(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> ResourceNotFoundException.newInstance("User", "id", id).get());
     }
+
+    public User getUserEntityOrThrow(UserResponseDTO userResponseDTO) {
+        // Assuming the userResponseDTO contains the necessary information to identify the user
+        long userId = userResponseDTO.getId();
+        return getUserEntityOrThrow(userId);
+    }
+
+
 
 
 }

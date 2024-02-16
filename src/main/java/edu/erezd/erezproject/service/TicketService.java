@@ -4,6 +4,8 @@ import edu.erezd.erezproject.dto.TicketCloseDTO;
 import edu.erezd.erezproject.dto.TicketCreateDTO;
 import edu.erezd.erezproject.dto.TicketResponseDTO;
 
+import java.util.List;
+
 public interface TicketService {
 
     TicketResponseDTO createTicket(TicketCreateDTO ticketDTO);
@@ -14,5 +16,5 @@ public interface TicketService {
 
     TicketResponseDTO closeTicket(long id, TicketCloseDTO ticketDTO);
 
-    TicketResponseDTO getAllTickets();
+    List<TicketResponseDTO> getAllTickets();
 }
