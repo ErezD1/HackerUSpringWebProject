@@ -1,9 +1,5 @@
 package edu.erezd.erezproject.dto;
 
-<<<<<<< HEAD
-public class CommentResponseDTO {
-}
-=======
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,5 +20,3 @@ public class CommentResponseDTO {
     private LocalDateTime updatedAt;
 
 }
-
->>>>>>> b9077c4 (V1 for Project)

@@ -1,17 +1,12 @@
 package edu.erezd.erezproject.entity;
 
-<<<<<<< HEAD
-public class Comment {
-}
-=======
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @AllArgsConstructor
@@ -40,4 +35,3 @@ public class Comment {
     private LocalDateTime updatedAt;
 }
 
->>>>>>> b9077c4 (V1 for Project)

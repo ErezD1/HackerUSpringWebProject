@@ -1,10 +1,6 @@
 package edu.erezd.erezproject.controller;
 
-<<<<<<< HEAD
-public class CommentController {
-=======
 import edu.erezd.erezproject.dto.CommentCreateDTO;
-import edu.erezd.erezproject.dto.CommentResponseDTO;
 import edu.erezd.erezproject.dto.CommentUpdateDTO;
 import edu.erezd.erezproject.entity.Comment;
 import edu.erezd.erezproject.service.CommentService;
@@ -57,5 +53,5 @@ public class CommentController {
                 .updatedAt(comment.getUpdatedAt())
                 .build();
     }
->>>>>>> b9077c4 (V1 for Project)
+
 }
